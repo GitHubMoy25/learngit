@@ -1,0 +1,32 @@
+linux安装zookeeper
+yum -y install wget
+
+sudo wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
+
+sudo tar -xf zookeeper-3.4.10.tar.gz
+
+sudo mv zookeeper-3.4.10 zookeeper3410
+
+sudo rm -f zookeeper-3.4.10.tar.gz 
+
+yum install vim
+
+sudo vim /etc/profile
+export ZOOKEEPER_INSTALL=/usr/local/zookeeper/zookeeper3410
+export PATH=$PATH:$ZOOKEEPER_INSTALL/bin
+
+cd zookeeper/zookeeper3410
+cp zoo_sample.cfg zoo.cfg
+
+sudo vim zoo.cfg
+dataDir=/tmp/zookeeper/data
+dataLogDir=/tmp/zookeeper/log
+
+sudo mkdir /tmp/zookeeper
+sudo mkdir /tmp/zookeeper/data
+sudo mkdir /tmp/zookeeper/log
+
+
+cd /usr/local/zookeeper/zookeeper3410/bin/
+./zkServer.sh start
+
